@@ -1,0 +1,43 @@
+# macOS
+.DS_Store
+
+# Node.js dependencies
+node_modules/
+
+# Vagrant
+.vagrant/
+
+# Consul data directory
+data/
+
+# HAProxy logs
+*.log
+*.pid
+
+# Visual Studio Code directory
+.vscode/
+
+# Ignore any local configuration files
+*.env
+
+# Ignore OS-generated files
+.DS_Store*
+Thumbs.db
+
+# Ignore system-specific files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Ignore npm-debug.log
+npm-debug.log*
+
+# Ignore yarn log files
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore editor-specific files
+.idea/
+*.swp
+*.swo
+*~
