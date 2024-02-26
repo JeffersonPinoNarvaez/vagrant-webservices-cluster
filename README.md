@@ -1,2 +1,2 @@
 # vagrant-webservices
-This is a template created entire using vagrant, consult, haproxy and nodeJS that can be used for your own projects. Everything is automated so can be use out of box.
+This is a template created entirely using vagrant, consult, haproxy, and nodeJS. It can be used for your projects. Everything is automated so it can be used out of the box.
