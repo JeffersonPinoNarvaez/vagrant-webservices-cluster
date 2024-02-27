@@ -1,14 +1,29 @@
 #!/bin/bash
 
-ip_address=$(hostname -I | awk '{print $2}')
-echo "La dirección IP de la máquina virtual es: $ip_address"
+set -e
 
-sudo apt update -y
-sudo apt upgrade -y
+echo "
+ ___   _______  __   __      ___  _______  _______  _______  _______  ______    _______  _______  __    _  _______  ___   __    _  _______ 
+|   | |   _   ||  |_|  |    |   ||       ||       ||       ||       ||    _ |  |       ||       ||  |  | ||       ||   | |  |  | ||       |
+|   | |  |_|  ||       |    |   ||    ___||    ___||    ___||    ___||   | ||  |  _____||   _   ||   |_| ||    _  ||   | |   |_| ||   _   |
+|   | |       ||       |    |   ||   |___ |   |___ |   |___ |   |___ |   |_||_ | |_____ |  | |  ||       ||   |_| ||   | |       ||  | |  |
+|   | |       ||       | ___|   ||    ___||    ___||    ___||    ___||    __  ||_____  ||  |_|  ||  _    ||    ___||   | |  _    ||  |_|  |
+|   | |   _   || ||_|| ||       ||   |___ |   |    |   |    |   |___ |   |  | | _____| ||       || | |   ||   |    |   | | | |   ||       |
+|___| |__| |__||_|   |_||_______||_______||___|    |___|    |_______||___|  |_||_______||_______||_|  |__||___|    |___| |_|  |__||_______|
+ " 
+echo -e "\n\n🚀 Install and configure our web load balancer... 🛠️"
+
+echo -e "\n\nUpdating our server repo..."
+sudo apt update && apt upgrade -y
+
+echo -e "\n\nInstalling and enabling our haproxy server..."
 sudo apt install haproxy -y
 sudo systemctl enable haproxy
 
+echo -e "\n\nCopying our already set up haproxy configuration file..."
+sudo cp -r /home/vagrant/sharedFolder/haproxy.cfg /etc/haproxy/haproxy.cfg
 
-sudo rsync -avz -e ssh /vagrant/configurations/haproxy.cfg vagrant@$ip_address:/etc/haproxy/haproxy
-
+echo -e "\n\nstarting our haproxy web server..."
 sudo systemctl restart haproxy
+
+echo -e "\n\n🚀 Load balancer server was successfully created, configured, and started! 🌟"
