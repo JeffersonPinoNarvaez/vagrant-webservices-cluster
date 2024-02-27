@@ -27,3 +27,29 @@ echo -e "\n\nstarting our haproxy web server..."
 sudo systemctl restart haproxy
 
 echo -e "\n\n🚀 Load balancer server was successfully created, configured, and started! 🌟"
+
+CONSUL_VERSION = "1.14.0"
+
+# Script para instalar Consul y configurar el servidor
+
+echo "Instalando Consul..."
+wget https://releases.hashicorp.com/consul/#{CONSUL_VERSION}/consul_#{CONSUL_VERSION}_linux_amd64.zip
+unzip consul_#{CONSUL_VERSION}_linux_amd64.zip
+sudo mv consul /usr/local/bin/
+sudo chmod +x /usr/local/bin/consul
+sudo mkdir -p /etc/consul.d/bootstrap
+
+# Configuración de Consul para el servidor
+echo '{
+  "server": true,
+  "node_name": "consul-server",
+  "bootstrap_expect": 3,
+  "data_dir": "/tmp/consul",
+  "bind_addr": "192.168.100.20",
+  "client_addr": "0.0.0.0",
+  "ui": true,
+  "connect": {"enabled": true}
+}' | sudo tee /etc/consul.d/bootstrap/config.json
+
+# Iniciar Consul como servidor
+consul agent -config-dir=/etc/consul.d/bootstrap &
