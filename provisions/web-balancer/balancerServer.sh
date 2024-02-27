@@ -20,6 +20,12 @@ echo -e "\n\nInstalling and enabling our haproxy server..."
 sudo apt install haproxy -y
 sudo systemctl enable haproxy
 
+echo -e "\n\nCreating our personalized errors folder"
+sudo mkdir -p /etc/haproxy/errors/personalized
+
+echo -e "\n\nCopying our haproxy 503 personalized page.."
+sudo cp -r /home/vagrant/sharedFolder/503.http /etc/haproxy/errors/personalized/503.http
+
 echo -e "\n\nCopying our already set up haproxy configuration file..."
 sudo cp -r /home/vagrant/sharedFolder/haproxy.cfg /etc/haproxy/haproxy.cfg
 
