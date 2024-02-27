@@ -1,0 +1,41 @@
+HTTP/1.0 504 Gateway Time-out
+Cache-Control: no-cache
+Connection: close
+Content-Type: text/html
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>503 Oops! Our Monkeys Are on Strike Again!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #ff6347;
+        }
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>503 Oops! Our Monkeys Are on Strike Again!</h1>
+        <p>It seems our monkeys took an unexpected break! Don't worry, we've sent them a bunch of bananas and they should be back to fixing things soon. Please bear with us while we convince them to get back to work. In the meantime, feel free to enjoy a banana smoothie and some light reading. We apologize for the inconvenience and thank you for your patience!</p>
+    </div>
+</body>
+</html>
+
