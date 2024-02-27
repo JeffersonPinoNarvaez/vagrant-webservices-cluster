@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
     webApp1.vm.hostname = "webApp1"
     webApp1.vm.provision "shell", path: "./provisions/web-servers/webApp.sh"
     webApp1.vm.provision "shell", path: "./provisions/web-servers/consul-server.sh"
-    webApp1.vm.synced_folder "./sharedFolder", "/home/vagrant/sharedFolder"   
+    webApp1.vm.synced_folder "./sharedFolder", "/home/vagrant/sharedFolder"
   end
 
   config.vm.define :webApp2 do |webApp2|
@@ -23,7 +23,7 @@ Vagrant.configure("2") do |config|
     webApp2.vm.hostname = "webApp2"
     webApp2.vm.provision "shell", path: "./provisions/web-servers/webApp.sh"
     webApp2.vm.provision "shell", path: "./provisions/web-servers/consul-client.sh"
-    webApp2.vm.synced_folder "./sharedFolder", "/home/vagrant/sharedFolder"   
+    webApp2.vm.synced_folder "./sharedFolder", "/home/vagrant/sharedFolder"
   end
 
   config.vm.define :webApp3 do |webApp3|
@@ -32,14 +32,14 @@ Vagrant.configure("2") do |config|
     webApp3.vm.hostname = "webApp3"
     webApp3.vm.provision "shell", path: "./provisions/web-servers/webApp.sh"
     webApp3.vm.provision "shell", path: "./provisions/web-servers/consul-client.sh"
-    webApp3.vm.synced_folder "./sharedFolder", "/home/vagrant/sharedFolder"   
+    webApp3.vm.synced_folder "./sharedFolder", "/home/vagrant/sharedFolder"
   end
     
   config.vm.define :balancerServer do |balancerServer|
     balancerServer.vm.box = "bento/ubuntu-22.04"
     balancerServer.vm.network :private_network, ip: "192.168.100.20"
     balancerServer.vm.hostname = "balancerServer"
-    balancerServer.vm.provision "shell", path: "./provisions/web-balancer/balancerServer.sh"    
+    balancerServer.vm.provision "shell", path: "./provisions/web-balancer/balancerServer.sh"
     balancerServer.vm.synced_folder "./sharedFolder", "/home/vagrant/sharedFolder"
     balancerServer.vm.network "forwarded_port", guest: 80, host: 8080
   end
