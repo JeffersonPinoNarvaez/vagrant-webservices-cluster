@@ -36,7 +36,7 @@ Vagrant.configure("2") do |config|
     balancerServer.vm.box = "bento/ubuntu-22.04"
     balancerServer.vm.network :private_network, ip: "192.168.100.20"
     balancerServer.vm.hostname = "balancerServer"
-    #balancerServer.vm.provision "shell", path: "./provisions/web-balancer/balancerServer.sh"
-    config.vm.synced_folder "./sharedFolder", "/home/vagrant/sharedFolder"
+    balancerServer.vm.provision "shell", path: "./provisions/web-balancer/balancerServer.sh"
+    balancerServer.vm.synced_folder "./sharedFolder", "/home/vagrant/sharedFolder"
   end
 end
