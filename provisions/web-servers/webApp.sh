@@ -43,3 +43,26 @@ npm install -g pm2 -y
 
 echo -e "\n\nStarting our nodeJs web server in the port $server_port"
 pm2 start index.js --name "web-service" --watch -- $server_port
+
+#verificar version
+CONSUL_VERSION = "1.14.0"
+
+echo "Instalando Consul..."
+
+wget https://releases.hashicorp.com/consul/#{CONSUL_VERSION}/consul_#{CONSUL_VERSION}_linux_amd64.zip
+unzip consul_#{CONSUL_VERSION}_linux_amd64.zip
+sudo mv consul /usr/local/bin/
+sudo chmod +x /usr/local/bin/consul
+sudo mkdir -p /etc/consul.d
+
+# Configuración de Consul para el agente
+echo '{
+  "node_name": "consul-agent-NOMBRE",
+  "data_dir": "/tmp/consul",
+  "bind_addr": "IP_DEL_AGENTE",
+  "client_addr": "0.0.0.0",
+  "retry_join": ["192.168.100.20"]
+}' | sudo tee /etc/consul.d/config.json
+
+# Iniciar Consul como agente
+consul agent -config-dir=/etc/consul.d &
