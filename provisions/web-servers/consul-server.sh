@@ -4,6 +4,18 @@
 ip_address=$(hostname -I | awk '{print $2}')
 hostname=$(hostname)
 
+echo "
+######################################
+#                                    #
+#         iamjeffersonpino           #
+#                                    #
+#        created by @devpino         #
+#            29-02-2024              #
+#                                    #
+######################################
+"
+echo -e "\n\n🚀 Install and configure our consul server in the server $ip_address... 🛠️"
+
 echo -e "\n\n⚙️ Adding HashiCorp GPG key and repository..."
 wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
 

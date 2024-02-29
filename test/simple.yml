@@ -1,0 +1,22 @@
+config:
+  target: http://192.168.100.20
+  phases:
+      # Duration of the first phase in seconds, Request arrival rate per second during the first phase
+      - duration: 300
+        arrivalRate: 10
+      # Duration of the second phase in seconds, Increase in request arrival rate per second to triple,
+      # Gradual increase in request arrival rate per second during the second phase
+      - duration: 600
+        arrivalRate: 30
+        rampTo: 30
+      # Duration of the third phase in seconds, Maintain request arrival rate per second at triple during the third phase
+      - duration: 300
+        arrivalRate: 30
+
+scenarios:
+  - name: test
+    flow: 
+    - get: 
+        url: "/"
+    # Waiting time of 2 seconds per requests.
+    - think: 2
