@@ -42,4 +42,6 @@ echo -e "\n\nInstalling pm2 to manage our nodejs demon....."
 npm install -g pm2 -y
 
 echo -e "\n\nStarting our nodeJs web server in the port $server_port"
-pm2 start -f index.js --name "web-service" --watch -- $server_port
+sudo pm2 -f start /home/webService/app/index.js -- 3000
+sudo pm2 -f start /home/webService/app/index.js -- 3001
+sudo pm2 startup

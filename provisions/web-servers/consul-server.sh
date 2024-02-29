@@ -10,14 +10,12 @@ wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/sha
 echo -e "\n\n🔄 Updating package manager and installing Consul..."
 sudo apt update && sudo apt install consul -y
 
-echo -e "\n\n🚀 Running Consul agent as a background process..."
-nohup consul agent \
-  -server \
-  -bootstrap-expect=1 \
-  -node="agent-$hostname" \
-  -bind="$ip_address" \
-  -data-dir=/tmp/consul \
-  -config-dir=/etc/consul.d \
-  >/dev/null 2>&1 &
+echo -e "\n\n🚀 Running and Starting a Consul Server agent as a background process..."
 
-echo -e "\n\n✅ Consul agent started successfully."
+sudo vim /etc/systemd/system/consul.service
+nohup consul agent -server -ui -bootstrap-expect=1 -node=consul-server-$hostname -bind=$ip_address -client=0.0.0.0 -data-dir=/var/consul -datacenter=dc1 >/dev/null 2>&1 &
+
+sudo systemctl enable consul
+sudo systemctl start consul
+
+echo -e "\n\n✅ $hostname Server Consul agent started successfully."
