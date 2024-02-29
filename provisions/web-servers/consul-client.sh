@@ -1,8 +1,5 @@
 #!/bin/bash
 
-#Manage errors.
-set -e
-
 # Scope variables
 ip_address=$(hostname -I | awk '{print $2}')
 hostname=$(hostname)
@@ -14,16 +11,7 @@ wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/sha
 echo -e "\n\n🔄 Updating the package manager and installing Consul..."
 sudo apt update && sudo apt install consul -y
 
-echo -e "\n\n🚀 Starting the Consul agent as a background process..."
-nohup consul agent \
-  -node="agent-$hostname" \
-  -bind="$ip_address" \
-  -enable-script-checks=true \
-  -data-dir=/tmp/consul \
-  -config-dir=/etc/consul.d \
-  >/dev/null 2>&1 &
+echo -e "\n\n🚀 Starting and Joining the Consul cluster as a background process..."
+nohup consul agent -node=consul-client-$hostname -bind=$ip_address -data-dir=/var/consul -retry-join=$consul_server >/dev/null 2>&1 &
 
-echo -e "\n\n🤝 Joining the Consul cluster with the specified server..."
-consul join $consul_server
-
-echo -e "\n\n✅ Consul agent-$hostname joined successfully."
+echo -e "\n\n✅ $hostname Consul agent joined successfully."
